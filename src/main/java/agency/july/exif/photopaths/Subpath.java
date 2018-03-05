@@ -4,15 +4,15 @@ import java.util.Arrays;
 
 public class Subpath {
 	
-	private float[] data; 
+	private double[] data; 
 	private boolean closed; 
 	
 	public Subpath (String subPathStr) {
 		String[] dataStr = subPathStr.split(",");
 		closed = dataStr[0].equals("-");
-		data = new float[dataStr.length-1];
+		data = new double[dataStr.length-1];
 		for (int i = 1; i<dataStr.length; i++) {
-			data[i-1] = Float.parseFloat(dataStr[i]);
+			data[i-1] = Double.parseDouble(dataStr[i]);
 		}
 	}
 	
@@ -20,15 +20,15 @@ public class Subpath {
 		return data.length / 6;
 	}	
 
-	public float[] getNode(int index) {
+	public double[] getNode(int index) {
 		return Arrays.copyOfRange(data, index*6, index*6 + 6);
 	}	
 
-	public float[] getSpline(int index) {
+	public double[] getSpline(int index) {
 		if (index < data.length / 6) {
 			return Arrays.copyOfRange(data, index*6+2, index*6 + 10);
 		} else {
-			float[] res = new float[8];
+			double[] res = new double[8];
 			for (int i=0; i<4; i++) {
 				res[i] = data[data.length-4 + i];
 				res[4+i] = data[i];
@@ -37,11 +37,11 @@ public class Subpath {
 		}
 	}	
 
-	public float[] getData() {
+	public double[] getData() {
 		return data;
 	}
 
-	public void setData(float[] data) {
+	public void setData(double[] data) {
 		this.data = data;
 	}
 
